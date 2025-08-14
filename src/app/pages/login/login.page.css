@@ -1,0 +1,121 @@
+.login-wrapper {
+  min-height: 100vh;
+  padding: var(--space-2xl) var(--space-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card {
+  width: 100%;
+}
+
+.login-hero {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+}
+
+.login-panel {
+  position: relative;
+  padding: clamp(2rem, 6vw, 3.5rem);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(6px);
+  animation: panelIn .7s var(--transition-base);
+}
+
+.logo-circle {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: var(--radius-full);
+  font-size: 1.5rem;
+  box-shadow: var(--shadow-md);
+  animation: popIn .6s ease;
+}
+
+.login-btn {
+  width: 100%;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+
+.login-btn i {
+  font-size: 1rem;
+}
+
+.foot-note {
+  font-size: var(--font-size-xs);
+  margin-top: var(--space-lg);
+}
+
+.fade-in-delay {
+  animation: fadeIn .9s var(--transition-base);
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(.4);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Background subtle decorative gradients */
+.login-wrapper:before, .login-wrapper:after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at 30% 30%, var(--color-accent-alt) 0%, transparent 70%);
+  opacity: .25;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.login-wrapper:after {
+  left: auto;
+  right: -160px;
+  top: 40%;
+  background: radial-gradient(circle at 70% 50%, var(--color-positive) 0%, transparent 70%);
+  opacity: .18;
+}
+
+.login-wrapper:before {
+  left: -180px;
+  top: 10%;
+}
+
+@media (max-width: 580px) {
+  .login-panel {
+    padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .logo-circle {
+    width: 56px;
+    height: 56px;
+    font-size: 1.25rem;
+  }
+}

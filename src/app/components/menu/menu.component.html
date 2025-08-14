@@ -1,0 +1,54 @@
+<nav class="app-menu">
+  <div class="menu-inner flex flex-col">
+    <div class="menu-user surface-alt">
+      @if (loadingUser()) {
+        <div class="user-skeleton">
+          <div class="avatar-skel shimmer"></div>
+          <div class="lines">
+            <div class="line shimmer"></div>
+            <div class="line small shimmer"></div>
+          </div>
+        </div>
+      } @else if (user()) {
+        <div class="user-info">
+          <div class="avatar" aria-hidden="true">{{ user()!.username.slice(0, 1).toUpperCase() }}</div>
+          <div class="meta">
+            <div class="name">{{ user()!.username }}</div>
+            <a class="profile-link" [routerLink]="'/profile'" routerLinkActive="active"><i class="fa-solid fa-user"></i>
+              Perfil</a>
+          </div>
+        </div>
+      } @else {
+        <div class="user-error text-faint">Sin datos de usuario</div>
+      }
+    </div>
+
+    <ul class="menu-list">
+      @for (item of items; track item.route) {
+        <li>
+          <a [routerLink]="item.route" routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: item.exact ?? false }" class="menu-link">
+            <i class="fa-solid fa-{{item.icon}} icon" aria-hidden="true"></i>
+            <span class="label">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="menu-footer mt-auto">
+      <button (click)="logout()" [disabled]="processingLogout()" class="c-btn c-btn--ghost logout-btn">
+        @if (!processingLogout()) {
+          <i class="fa-solid fa-right-from-bracket"></i>
+        } @else {
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+        }
+        <span>@if (!processingLogout()) {
+          Salir
+        } @else {
+          Cerrando...
+        }</span>
+      </button>
+    </div>
+  </div>
+</nav>
+

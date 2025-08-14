@@ -1,0 +1,57 @@
+<div class="dashboard-wrapper container flow fade-in">
+  <header class="dashboard-header flex flex-col gap-sm">
+    <div class="flex flex-col gap-xs">
+      @if (user()) {
+        <h1 class="h-2">Hola, {{ user()!.username }}</h1>
+        <p class="text-soft lead">Bienvenido a tu espacio de hábitos y ánimo.</p>
+      } @else if (!loadingUser()) {
+        <h1 class="h-2">Hola</h1>
+        <p class="text-soft">No pudimos cargar tu perfil.</p>
+      } @else {
+        <h1 class="h-3 text-soft"><i class="fa-solid fa-circle-notch fa-spin"></i> Cargando...</h1>
+      }
+    </div>
+    <div class="calendar-toolbar flex inline-flow">
+      <button (click)="prevMonth()" aria-label="Mes anterior" class="c-btn c-btn--ghost"><i
+        class="fa-solid fa-chevron-left"></i></button>
+      <div class="month-label h-4">{{ month() | date:'MMMM yyyy' }}</div>
+      <button (click)="nextMonth()" aria-label="Mes siguiente" class="c-btn c-btn--ghost"><i
+        class="fa-solid fa-chevron-right"></i></button>
+      <button (click)="today()" class="c-btn c-btn--outline">Hoy</button>
+      <div class="flex-grow"></div>
+    </div>
+  </header>
+
+  <section class="habits-section flow">
+    @if (loadingHabits()) {
+      <div class="surface rounded flex-center calendar-loading"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+    } @else if (habits().length === 0) {
+      <div class="empty-state surface shadow-sm rounded flex flex-col flex-center gap-sm">
+        <i class="fa-solid fa-seedling empty-icon"></i>
+        <h2 class="h-3">Aún no tienes hábitos</h2>
+        <p class="text-soft text-center">Empieza creando tu primer hábito para construir una rutina consciente.</p>
+        <button class="c-btn c-btn--primary c-btn--pill" (click)="onCreateHabit()"><i class="fa-solid fa-plus"></i>
+          Crear hábito
+        </button>
+      </div>
+    } @else {
+      <div class="calendar surface shadow-sm rounded">
+        <div class="calendar-grid">
+          @for (d of daysOfWeek; track d) {
+            <div class="dow">{{ d }}</div>
+          }
+          @for (day of calendar(); track day.date) {
+            <div class="day-cell" [class.out-month]="!day.inMonth" [class.today]="isToday(day.date)">
+              <div class="day-number">{{ day.date.getDate() }}</div>
+              <div class="day-habits">
+                @for (h of day.habits; track h.irn) {
+                  <div class="habit-chip" [title]="h.title">{{ h.title }}</div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </section>
+</div>

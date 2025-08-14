@@ -1,0 +1,59 @@
+<div [formGroup]="profileFormGroup" class="profile-wrapper container fade-in flow">
+  <h1 class="h-2">Perfil</h1>
+  @if (loadingFlag()) {
+    <div class="surface rounded shadow-sm profile-card flex-center" style="min-height:160px;">
+      <div class="text-soft"><i class="fa-solid fa-circle-notch fa-spin"></i> Cargando perfil...</div>
+    </div>
+  } @else if (!currentUser()) {
+    <div class="surface rounded shadow-sm profile-card flex-center">
+      <p class="text-soft">No se pudo cargar el usuario.</p>
+    </div>
+  } @else {
+    <form class="surface rounded shadow-sm profile-card flow"
+          [formGroup]="profileFormGroup"
+          (ngSubmit)="save()">
+
+      <div class="field-group">
+        <label class="field-label" for="email">Email</label>
+        <input id="email" class="c-input" formControlName="emailForm" readonly />
+        <small class="text-faint">El email no puede cambiarse.</small>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="username">Nombre de usuario</label>
+        <input id="username"
+               class="c-input"
+               formControlName="usernameForm"
+               placeholder="Tu nombre" />
+
+        @let usernameCtrl = profileFormGroup.get('usernameForm');
+        @if (usernameCtrl?.touched && usernameCtrl?.invalid) {
+          <small class="text-error">
+            @if (usernameCtrl?.errors?.['required']) {
+              El nombre es requerido.
+            }
+            @if (usernameCtrl?.errors?.['minlength']) {
+              Mínimo 3 caracteres.
+            }
+            @if (usernameCtrl?.errors?.['maxlength']) {
+              Máximo 40 caracteres.
+            }
+          </small>
+        }
+      </div>
+
+      <div class="actions inline-flow">
+        <button type="submit"
+                class="c-btn c-btn--primary c-btn--pill"
+                [disabled]="!canSaveChangesFlag">
+          @if (!savingFlag()) {
+            <i class="fa-solid fa-floppy-disk"></i> Guardar
+          } @else {
+            <i class="fa-solid fa-circle-notch fa-spin"></i> Guardando...
+          }
+        </button>
+      </div>
+    </form>
+
+  }
+</div>

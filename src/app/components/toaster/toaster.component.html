@@ -1,0 +1,29 @@
+<div aria-atomic="true" aria-live="polite" class="toaster">
+  @for (t of toasts(); track t.id) {
+    <div class="toast" [ngClass]="t.type" role="alert">
+      <div class="toast__icon" aria-hidden="true">
+        @switch (t.type) {
+          @case ('success') {
+            <i class="fa-solid fa-circle-check" title="Éxito"></i>
+          }
+          @case ('error') {
+            <i class="fa-solid fa-circle-xmark" title="Error"></i>
+          }
+          @case ('warning') {
+            <i class="fa-solid fa-triangle-exclamation" title="Advertencia"></i>
+          }
+          @case ('info') {
+            <i class="fa-solid fa-circle-info" title="Info"></i>
+          }
+        }
+      </div>
+      <div class="toast__body">
+        <p class="toast__message">{{ t.message }}</p>
+      </div>
+      <button type="button" class="toast__close c-btn c-btn--ghost" (click)="dismiss(t.id)"
+              aria-label="Cerrar notificación">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+  }
+</div>
