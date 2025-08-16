@@ -1,0 +1,72 @@
+@if (!loadingFlag()) {
+  <div class="habit-page-wrapper container flow">
+    @if (newHabitFlag() || habit()) {
+      <header class="flow-sm">
+        <h1 class="h-3">{{ newHabitFlag() ? 'Nuevo hábito' : 'Editar hábito' }}</h1>
+      </header>
+      <form [formGroup]="habitForm" (ngSubmit)="save()" class="habit-form flow">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="title">Título</label>
+            <input id="title" type="text" formControlName="titleForm" [class.invalid]="titleInvalidFlag"/>
+            @if (titleInvalidFlag) {
+              <small class="error-msg">Título requerido (max 100)</small>
+            }
+          </div>
+          <div class="form-field">
+            <label for="frequency">Frecuencia</label>
+            <select id="frequency" formControlName="frequencyForm">
+              @for (frequencyOption of frequencies; track frequencyOption.value) {
+                <option [value]="frequencyOption.value">{{ frequencyOption.label }}</option>
+              }
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="startDate">Inicio</label>
+            <input id="startDate" type="date" formControlName="startDateForm" [class.invalid]="startDateInvalidFlag"/>
+            @if (startDateInvalidFlag) {
+              <small class="error-msg">Fecha requerida</small>
+            }
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="description">Descripción</label>
+          <textarea id="description" rows="4" formControlName="descriptionForm"></textarea>
+        </div>
+        <div class="actions-row flex gap-sm wrap">
+          <habituary-button type="submit" color="primary" [loading]="savingFlag()"
+                            [disabled]="savingFlag() || habitForm.invalid" [pill]=true size="sm">
+            <i class="fa-solid" [class.fa-circle-notch]="savingFlag()" [class.fa-spin]="savingFlag()"
+               [class.fa-floppy-disk]="!savingFlag()"></i>
+            {{ newHabitFlag() ? 'Crear' : (savingFlag() ? 'Guardando' : 'Guardar') }}
+          </habituary-button>
+          @if (!newHabitFlag()) {
+            <habituary-button type="button" color="success" (click)="complete()" [disabled]="completingFlag()"
+                              [loading]="completingFlag()" [pill]=true size="sm">
+              <i class="fa-solid" [class.fa-circle-notch]="completingFlag()" [class.fa-spin]="completingFlag()"
+                 [class.fa-check]="!completingFlag()"></i>
+              Completar hoy
+            </habituary-button>
+            <habituary-button type="button" color="danger" (click)="delete()" [disabled]="deletingFlag()"
+                              [loading]="deletingFlag()" [pill]=true size="sm">
+              <i class="fa-solid" [class.fa-circle-notch]="deletingFlag()" [class.fa-spin]="deletingFlag()"
+                 [class.fa-trash]="!deletingFlag()"></i>
+              Eliminar
+            </habituary-button>
+          }
+          <habituary-button type="button" [outline]="true" color="outline" routerLink="/dashboard" [pill]=true
+                            size="sm">
+            <i class="fa-solid fa-arrow-left"></i> Volver
+          </habituary-button>
+        </div>
+      </form>
+    } @else {
+      <div class="surface rounded p-lg text-center">
+        <p>No se pudo cargar el hábito.</p>
+        <a routerLink="/dashboard" class="c-btn c-btn--primary">Regresar</a>
+      </div>
+    }
+  </div>
+} @else {
+  <div class="flex-center p-2xl"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i></div>
+}

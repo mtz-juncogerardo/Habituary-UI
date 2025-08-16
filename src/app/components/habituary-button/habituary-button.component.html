@@ -1,0 +1,22 @@
+<button
+  [attr.aria-label]="ariaLabel || null"
+  [attr.type]="type"
+  [disabled]="disabled || loading"
+  [ngClass]="[
+    'hb-color-' + color,
+    'hb-size-' + size,
+    pill ? 'hb-pill' : '',
+    outline ? 'hb-outline' : '',
+    ghost ? 'hb-ghost' : '',
+    fullWidth ? 'hb-full' : '',
+    extraClasses
+  ]"
+  [queryParams]="queryParams"
+  [routerLink]="routerLink"
+  class="hb-btn"
+>
+  @if (loading) {
+    <span class="hb-btn__spinner"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+  }
+  <span class="hb-btn__content"><ng-content></ng-content></span>
+</button>

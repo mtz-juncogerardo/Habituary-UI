@@ -1,0 +1,27 @@
+.habit-chip {
+  font-size: calc(var(--font-size-xs) * .95);
+  line-height: 1.1;
+  padding: 4px 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  cursor: default;
+  transition: background var(--transition-fast), opacity var(--transition-fast), filter var(--transition-fast);
+  cursor: pointer;
+}
+
+.habit-chip:hover,
+.habit-chip:focus-visible {
+  filter: brightness(.9);
+}
+
+@media (max-width: 620px) {
+  .habit-chip {
+    font-size: 10px;
+    padding: 3px 5px;
+  }
+}

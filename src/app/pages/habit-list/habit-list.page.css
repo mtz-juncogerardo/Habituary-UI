@@ -1,0 +1,54 @@
+.habit-list-wrapper {
+  padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+}
+
+.range-form {
+  gap: var(--space-md);
+  align-items: flex-end;
+}
+
+.range-form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.range-form input {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  font: inherit;
+}
+
+.range-form input:focus {
+  outline: 2px solid var(--color-accent);
+  background: var(--color-surface);
+}
+
+.range-form habituary-button {
+  margin-top: 2px;
+}
+
+.habit-banner-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+@media (max-width: 620px) {
+  .habit-list-wrapper {
+    padding: var(--space-lg) var(--space-md) var(--space-xl);
+  }
+
+  .range-form {
+    align-items: stretch;
+  }
+
+  .range-form habituary-button {
+    margin-top: 0;
+  }
+}

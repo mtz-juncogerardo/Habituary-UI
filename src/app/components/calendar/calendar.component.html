@@ -1,0 +1,35 @@
+<div class="calendar-wrapper flow">
+  <div class="calendar-toolbar flex inline-flow">
+    <button (click)="prevMonth()" aria-label="Mes anterior" class="c-btn c-btn--ghost"><i
+      class="fa-solid fa-chevron-left"></i></button>
+    <div class="month-label h-4">{{ month() | date:'MMMM yyyy' }}</div>
+    <button (click)="nextMonth()" aria-label="Mes siguiente" class="c-btn c-btn--ghost"><i
+      class="fa-solid fa-chevron-right"></i></button>
+    <button (click)="today()" class="c-btn c-btn--outline">Hoy</button>
+    <div class="flex-grow"></div>
+  </div>
+  <div class="calendar surface shadow-sm rounded">
+    <div class="calendar-grid">
+      @for (dayOfWeekLabel of daysOfWeek; track dayOfWeekLabel) {
+        <div class="dow">{{ dayOfWeekLabel }}</div>
+      }
+      @for (calendarDay of calendarDays(); track calendarDay.date) {
+        <div class="day-cell" (click)="handleDayClick(calendarDay)" [class.out-month]="!calendarDay.inMonth"
+             [class.today]="isToday(calendarDay.date)">
+          <div class="day-number">{{ calendarDay.date.getDate() }}</div>
+          <div class="day-habits">
+            @for (habitItem of calendarDay.habits; track habitItem.irn; let idx = $index) {
+              @if (calendarDay.habits.length > 3 && idx === 2) {
+                <span class="habit-chip habit-chip--more" title="Ver más" (click)="handleViewMoreClickForDay($event, calendarDay.date)">... ver más</span>
+              } @else if (calendarDay.habits.length > 3 && idx > 2) {
+                <!-- omit extra habits -->
+              } @else {
+                <app-habit-chip [habit]="habitItem"/>
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

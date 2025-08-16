@@ -6,14 +6,15 @@
       <p class="lead text-center">Tu diario consciente: registra hábitos, reflexiona tu estado de ánimo y observa tu
         crecimiento día a día.</p>
       <div aria-hidden="true" class="divider"></div>
-      <button (click)="googleLogin()" [disabled]="loading()" class="c-btn c-btn--primary c-btn--pill login-btn">
+      <habituary-button (click)="googleLogin()" [disabled]="loading()" [fullWidth]="true" [loading]="loading()"
+                        [pill]="true" color="primary" size="lg">
         <i aria-hidden="true" class="fa-brands fa-google"></i>
         @if (!loading()) {
           <span>Iniciar sesión con Google</span>
         } @else {
           <span class="inline-flex center gap-xs"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Conectando...</span>
         }
-      </button>
+      </habituary-button>
       <p class="foot-note text-faint text-center">Al continuar aceptas que procesemos tus datos sólo para ofrecerte
         métricas de bienestar.</p>
     </div>

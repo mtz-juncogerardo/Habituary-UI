@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
   processingLogout = signal(false);
   items: MenuItem[] = [
     {label: 'Dashboard', icon: 'gauge-high', route: '/dashboard', exact: true},
+    {label: 'Habit List', icon: 'list-check', route: '/habit-list'},
     {label: 'Perfil', icon: 'user', route: '/profile'}
   ];
   private data = inject(DataService);
@@ -54,4 +55,3 @@ export class MenuComponent implements OnInit {
     }
   }
 }
-

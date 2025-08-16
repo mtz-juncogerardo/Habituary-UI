@@ -3,10 +3,12 @@ import {Router} from '@angular/router';
 import {DataService} from '../../services/data.service';
 import {ToasterService} from '../../services/toaster.service';
 import {lastValueFrom} from 'rxjs';
+import {HabituaryButtonComponent} from '../../components/habituary-button/habituary-button.component';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
+  imports: [HabituaryButtonComponent],
   templateUrl: './login.page.html',
   styleUrl: './login.page.css'
 })

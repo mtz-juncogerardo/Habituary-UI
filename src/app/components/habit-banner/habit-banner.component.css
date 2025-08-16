@@ -1,0 +1,89 @@
+.habit-banner {
+  padding: var(--space-lg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border: 1px solid var(--color-border);
+  cursor: default;
+}
+
+.habit-banner:hover {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.habit-banner.selected {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+.banner-header {
+  align-items: center;
+}
+
+.banner-title {
+  font-weight: 600;
+}
+
+.banner-desc {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.banner-meta {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: var(--font-size-xs);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.meta-row dt {
+  font-weight: 600;
+}
+
+.meta-row dd {
+  margin: 0;
+}
+
+.badge {
+  background: var(--color-accent-alt);
+  color: var(--color-accent-contrast);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge.freq {
+  background: var(--color-accent);
+}
+
+.sel-box {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+@media (max-width: 620px) {
+  .habit-banner {
+    padding: var(--space-md);
+  }
+}
+

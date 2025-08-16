@@ -1,0 +1,153 @@
+.hb-btn {
+  --hb-bg: var(--color-accent);
+  --hb-bg-hover: var(--color-accent-hover);
+  --hb-bg-active: var(--color-accent-active);
+  --hb-color: var(--color-accent-contrast);
+  --hb-border: var(--hb-bg);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55ch;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
+  padding: .6rem 1.05rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hb-border);
+  background: var(--hb-bg);
+  color: var(--hb-color);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.hb-btn:hover {
+  background: var(--hb-bg-hover);
+}
+
+.hb-btn:active {
+  background: var(--hb-bg-active);
+  transform: translateY(1px);
+}
+
+.hb-btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.hb-btn.hb-pill {
+  border-radius: var(--radius-full);
+}
+
+.hb-btn.hb-full {
+  width: 100%;
+}
+
+.hb-btn.hb-outline {
+  background: transparent;
+  color: var(--color-accent);
+  --hb-border: var(--color-accent);
+}
+
+.hb-btn.hb-outline:hover {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+.hb-btn.hb-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-accent);
+}
+
+.hb-btn.hb-ghost:hover {
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
+
+/* colors */
+.hb-color-primary {
+  --hb-bg: var(--color-accent);
+  --hb-bg-hover: var(--color-accent-hover);
+  --hb-bg-active: var(--color-accent-active);
+  --hb-color: var(--color-accent-contrast);
+  --hb-border: var(--color-accent);
+}
+
+.hb-color-success {
+  --hb-bg: var(--color-positive);
+  --hb-bg-hover: color-mix(in srgb, var(--color-positive) 90%, black);
+  --hb-bg-active: color-mix(in srgb, var(--color-positive) 80%, black);
+  --hb-color: #fff;
+  --hb-border: var(--color-positive);
+}
+
+.hb-color-danger {
+  --hb-bg: var(--color-danger);
+  --hb-bg-hover: color-mix(in srgb, var(--color-danger) 90%, black);
+  --hb-bg-active: color-mix(in srgb, var(--color-danger) 80%, black);
+  --hb-color: #fff;
+  --hb-border: var(--color-danger);
+}
+
+.hb-color-warning {
+  --hb-bg: var(--color-warning);
+  --hb-bg-hover: color-mix(in srgb, var(--color-warning) 90%, black);
+  --hb-bg-active: color-mix(in srgb, var(--color-warning) 80%, black);
+  --hb-color: #000;
+  --hb-border: var(--color-warning);
+}
+
+.hb-color-neutral {
+  --hb-bg: var(--color-surface-alt);
+  --hb-bg-hover: var(--color-surface);
+  --hb-bg-active: var(--color-surface);
+  --hb-color: var(--color-text);
+  --hb-border: var(--color-border);
+}
+
+.hb-color-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-accent);
+}
+
+.hb-color-outline {
+  background: transparent;
+  color: var(--color-accent);
+  --hb-border: var(--color-accent);
+}
+
+/* sizes */
+.hb-size-xs {
+  padding: 2px 8px;
+  font-size: var(--font-size-xs);
+  min-height: 1.75rem;
+}
+
+.hb-size-sm {
+  padding: .45rem .8rem;
+  font-size: var(--font-size-xs);
+}
+
+.hb-size-md {
+  padding: .6rem 1.05rem;
+}
+
+.hb-size-lg {
+  padding: .85rem 1.25rem;
+  font-size: var(--font-size-sm);
+}
+
+.hb-btn__spinner {
+  display: inline-flex;
+}
+
+.hb-btn__spinner + .hb-btn__content {
+  opacity: .85;
+}
+
+:host-context(:root[data-theme="dark"]) .hb-color-neutral {
+  --hb-bg: var(--color-surface-alt);
+  --hb-bg-hover: var(--color-surface);
+}
+

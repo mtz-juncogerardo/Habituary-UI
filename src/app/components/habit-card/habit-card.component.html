@@ -1,0 +1,22 @@
+<article (click)="openDetail()" (keydown.enter)="openDetail()" (keydown.space)="openDetail()"
+         class="habit-card surface shadow-sm rounded flow clickable" tabindex="0">
+  <header class="habit-card__header flex inline-flow">
+    <h3 class="h-4 m-0 flex-grow">{{ habit.title }}</h3>
+    @if (hasRemindersFlag) {
+      <span class="habit-card__reminders badge" title="Recordatorios">
+        <i class="fa-solid fa-bell"></i> {{ remindersCount }}
+      </span>
+    }
+  </header>
+  <p class="habit-card__description text-soft m-0">{{ habit.description }}</p>
+  <dl class="habit-meta">
+    <div class="habit-meta__row">
+      <dt>Frecuencia</dt>
+      <dd>{{ frequencyLabel }}</dd>
+    </div>
+    <div class="habit-meta__row">
+      <dt>Inicio</dt>
+      <dd>{{ habit.startDate | date:'mediumDate' }}</dd>
+    </div>
+  </dl>
+</article>

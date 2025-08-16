@@ -15,7 +15,7 @@
 
       <div class="field-group">
         <label class="field-label" for="email">Email</label>
-        <input id="email" class="c-input" formControlName="emailForm" readonly />
+        <input id="email" class="c-input" formControlName="emailForm" readonly/>
         <small class="text-faint">El email no puede cambiarse.</small>
       </div>
 
@@ -24,7 +24,7 @@
         <input id="username"
                class="c-input"
                formControlName="usernameForm"
-               placeholder="Tu nombre" />
+               placeholder="Tu nombre"/>
 
         @let usernameCtrl = profileFormGroup.get('usernameForm');
         @if (usernameCtrl?.touched && usernameCtrl?.invalid) {
@@ -43,15 +43,14 @@
       </div>
 
       <div class="actions inline-flow">
-        <button type="submit"
-                class="c-btn c-btn--primary c-btn--pill"
-                [disabled]="!canSaveChangesFlag">
+        <habituary-button type="submit" color="primary" [pill]="true" [disabled]="!canSaveChangesFlag"
+                          [loading]="savingFlag()">
           @if (!savingFlag()) {
             <i class="fa-solid fa-floppy-disk"></i> Guardar
           } @else {
             <i class="fa-solid fa-circle-notch fa-spin"></i> Guardando...
           }
-        </button>
+        </habituary-button>
       </div>
     </form>
 

@@ -1,0 +1,30 @@
+<div [class.selected]="selected" class="habit-banner surface-alt shadow-sm rounded">
+  <div class="banner-header flex gap-sm align-center">
+    <input (click)="onToggle($event)" [checked]="selected" aria-label="Seleccionar hábito" class="sel-box"
+           type="checkbox"/>
+    <h3 class="banner-title h-5 flex-grow m-0">{{ habit.title }}</h3>
+    <span class="badge freq">{{ frequencyLabel(habit.frequency) }}</span>
+    <span class="badge" title="Recordatorios"><i class="fa-solid fa-bell"></i> {{ habit.reminders?.length || 0 }}</span>
+    <span class="badge" title="Logs"><i class="fa-solid fa-list"></i> {{ habit.habitLogs?.length || 0 }}</span>
+    <habituary-button (click)="onEdit($event)" [outline]="true" ariaLabel="Editar hábito" color="outline" size="xs">
+      <i class="fa-solid fa-pen"></i>
+    </habituary-button>
+  </div>
+  <p class="banner-desc text-soft">{{ habit.description }}</p>
+  <dl class="banner-meta">
+    <div class="meta-row">
+      <dt>Inicio</dt>
+      <dd>{{ habit.startDate | date:'mediumDate' }}</dd>
+    </div>
+    @if (nextLimitDate) {
+      <div class="meta-row">
+        <dt>Fecha límite</dt>
+        <dd>@if (isNextLimitTomorrow()) {
+          Mañana
+        } @else {
+          {{ nextLimitDate | date:'mediumDate' }}
+        }</dd>
+      </div>
+    }
+  </dl>
+</div>

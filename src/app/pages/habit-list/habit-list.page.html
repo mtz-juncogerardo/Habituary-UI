@@ -1,0 +1,56 @@
+<div class="habit-list-wrapper container flow fade-in">
+  <header class="flow-sm">
+    <h1 class="h-3">Listado de hábitos</h1>
+    <form [formGroup]="filterForm" class="range-form flex flex-wrap gap-sm align-center">
+      <div class="form-field">
+        <label for="fromDate">Desde</label>
+        <input formControlName="fromDateForm" id="fromDate" type="date"/>
+      </div>
+      <div class="form-field">
+        <label for="toDate">Hasta</label>
+        <input formControlName="toDateForm" id="toDate" type="date"/>
+      </div>
+      <habituary-button (click)="search()" [outline]="true" ariaLabel="Buscar" color="outline" size="sm" type="button">
+        <i class="fa-solid fa-magnifying-glass"></i></habituary-button>
+      <div class="actions-inline flex gap-sm">
+        <habituary-button (click)="newHabit()" [pill]="true" color="primary" size="sm" type="button"><i
+          class="fa-solid fa-plus"></i> Nuevo
+        </habituary-button>
+        <habituary-button (click)="deleteSelected()" [disabled]="!hasSelectionFlag() || deletingFlag()" [loading]="deletingFlag()" [pill]="true" color="danger"
+                          size="sm" type="button">
+          <i [class.fa-circle-notch]="deletingFlag()" [class.fa-spin]="deletingFlag()" [class.fa-trash]="!deletingFlag()"
+             class="fa-solid"></i>
+          Eliminar
+        </habituary-button>
+      </div>
+    </form>
+  </header>
+
+  <div class="list-separator"></div>
+
+  @if (loadingFlag()) {
+    <div class="surface rounded p-xl flex-center"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+  } @else if (filteredHabits().length === 0) {
+    <div class="empty-state surface shadow-sm rounded flex flex-col flex-center gap-sm p-xl">
+      <i class="fa-solid fa-seedling empty-icon"></i>
+      <h2 class="h-4">Sin hábitos en el rango</h2>
+      <p class="text-soft text-center">Ajusta las fechas o crea un nuevo hábito.</p>
+      <habituary-button color="primary" size="sm" [pill]="true" (click)="newHabit()"><i class="fa-solid fa-plus"></i>
+        Crear hábito
+      </habituary-button>
+    </div>
+  } @else {
+    <ul class="habit-banner-list">
+      @for (habitItem of filteredHabits(); track habitItem.irn) {
+        <li>
+          <app-habit-banner
+            [habit]="habitItem"
+            [selected]="isSelected(habitItem)"
+            (toggle)="toggleSelectFromBanner($event)"
+            (edit)="openHabit($event)"
+          ></app-habit-banner>
+        </li>
+      }
+    </ul>
+  }
+</div>
